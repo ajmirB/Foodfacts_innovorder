@@ -9,8 +9,13 @@ import com.busgeeth.foodfacts.core.model.db.DbProductDao;
 import com.busgeeth.foodfacts.core.model.entities.Product;
 import com.busgeeth.foodfacts.helpers.ProductHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class ProductStore {
 
@@ -21,6 +26,23 @@ public class ProductStore {
     public ProductStore() {
         App app = SharedApplication.getInstance().getApplication();
         mProductDao = app.getDaoSession().getDbProductDao();
+    }
+
+    /**
+     * Get all the product in the db
+     * @return the list of product in the db, an empty list if there is nothing
+     */
+    public Single<List<Product>> getAllProduct() {
+        return Single.defer(() -> {
+            List<DbProduct> dbProducts = mProductDao.loadAll();
+            if (dbProducts == null) {
+                return Single.just(new ArrayList<Product>());
+            } else {
+               return Observable.fromIterable(dbProducts)
+                        .map(ProductHelper::dbToProduct)
+                        .toList();
+            }
+        });
     }
 
     /**

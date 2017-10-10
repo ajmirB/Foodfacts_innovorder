@@ -10,7 +10,7 @@ import com.busgeeth.foodfacts.R;
 import com.busgeeth.foodfacts.features.commons.BaseFragment;
 
 
-public class FoodFactDetailFragment extends BaseFragment {
+public class ProductDetailFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

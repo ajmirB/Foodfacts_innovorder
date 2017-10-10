@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/home_food_fact_list_fragment"
-        android:name="com.busgeeth.foodfacts.features.home.fragments.FoodFactListFragment"
+        android:name="com.busgeeth.foodfacts.features.home.fragments.ProductListFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/home_search_bar_edit_text_view_horizontal_margin"
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/home_food_fact_detail_fragment"
-        android:name="com.busgeeth.foodfacts.features.home.fragments.FoodFactDetailFragment"
+        android:name="com.busgeeth.foodfacts.features.home.fragments.ProductDetailFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/home_search_bar_edit_text_view_horizontal_margin"

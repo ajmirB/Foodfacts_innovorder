@@ -2,10 +2,6 @@ package com.busgeeth.foodfacts.core.managers;
 
 import android.util.Log;
 
-import com.busgeeth.foodfacts.App;
-import com.busgeeth.foodfacts.SharedApplication;
-import com.busgeeth.foodfacts.core.model.db.DbProduct;
-import com.busgeeth.foodfacts.core.model.db.DbProductDao;
 import com.busgeeth.foodfacts.core.model.entities.Product;
 import com.busgeeth.foodfacts.core.model.entities.ProductStatus;
 import com.busgeeth.foodfacts.core.model.errors.ProductNotFound;
@@ -13,7 +9,8 @@ import com.busgeeth.foodfacts.core.model.errors.UnknownError;
 import com.busgeeth.foodfacts.core.network.FoodFactService;
 import com.busgeeth.foodfacts.core.network.RestClient;
 import com.busgeeth.foodfacts.core.stores.ProductStore;
-import com.busgeeth.foodfacts.helpers.ProductHelper;
+
+import java.util.List;
 
 import io.reactivex.Single;
 
@@ -28,6 +25,14 @@ public class ProductManager {
     public ProductManager() {
         mFoodFactService = RestClient.getFoodFactService();
         mProductStore = new ProductStore();
+    }
+
+    /**
+     * Get all the product stored
+     * @return the list of product stored, an empty list if there is nothing stored
+     */
+    public Single<List<Product>> getAllProduct() {
+        return mProductStore.getAllProduct();
     }
 
     /**
@@ -47,7 +52,7 @@ public class ProductManager {
      * @param barcodeNumber barcode to identify the product
      * @return the product or an error
      */
-    public Single<Product> getProductFromServer(long barcodeNumber) {
+    private Single<Product> getProductFromServer(long barcodeNumber) {
         Log.d(TAG, "getProductFromServer");
         return Single.fromObservable(mFoodFactService.getProduct(barcodeNumber))
                 .flatMap(productResponse -> {
@@ -59,11 +64,6 @@ public class ProductManager {
                         return Single.error(new UnknownError());
                     }
                 })
-                .doOnSuccess(product -> {
-                    App app = SharedApplication.getInstance().getApplication();
-                    DbProductDao dbProductDao = app.getDaoSession().getDbProductDao();
-                    DbProduct dbProduct = ProductHelper.entitytoDbProduct(product);
-                    dbProductDao.insertOrReplaceInTx(dbProduct);
-                });
+                .flatMap(product -> mProductStore.saveProduct(product).andThen(Single.just(product)));
     }
 }

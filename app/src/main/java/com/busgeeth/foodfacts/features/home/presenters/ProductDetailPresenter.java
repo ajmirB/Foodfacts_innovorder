@@ -2,9 +2,9 @@ package com.busgeeth.foodfacts.features.home.presenters;
 
 import com.busgeeth.foodfacts.features.commons.BasePresenter;
 
-public class FoodFactListPresenter extends BasePresenter<FoodFactListPresenter.View> {
+public class ProductDetailPresenter extends BasePresenter<ProductDetailPresenter.View> {
 
-    public FoodFactListPresenter(View view) {
+    public ProductDetailPresenter(View view) {
         super(view);
     }
 
