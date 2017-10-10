@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Product {
 
+    @SerializedName("code")
+    private long mBarcode;
+
     @SerializedName("product_name")
     private String mName;
 
@@ -14,6 +17,11 @@ public class Product {
 
     @SerializedName("ingredients")
     private List<Ingredient> mIngredientList;
+
+
+    public long getBarcode() {
+        return mBarcode;
+    }
 
     public String getName() {
         return mName;
