@@ -1,8 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/home_search_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/home_search_bar_icon_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/home_search_text_input_edit_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/home_search_text_input_edit_text"
+        app:srcCompat="@drawable/ic_search"/>
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/home_search_text_input_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/home_search_bar_edit_text_view_horizontal_margin"
+        android:inputType="number"
+        app:layout_constraintLeft_toRightOf="@+id/home_search_image_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <fragment
+        android:id="@+id/home_food_fact_list_fragment"
+        android:name="com.busgeeth.foodfacts.features.home.fragments.FoodFactListFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/home_search_bar_edit_text_view_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/home_food_fact_fragments_horizontal_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/home_search_text_input_edit_text"
+        tools:layout="@layout/fragment_foodfact_list"/>
+
+    <fragment
+        android:id="@+id/home_food_fact_detail_fragment"
+        android:name="com.busgeeth.foodfacts.features.home.fragments.FoodFactDetailFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/home_search_bar_edit_text_view_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/home_food_fact_fragments_horizontal_guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_search_text_input_edit_text"
+        tools:layout="@layout/fragment_foodfact_detail"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/home_food_fact_fragments_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"/>
+
+</android.support.constraint.ConstraintLayout>
