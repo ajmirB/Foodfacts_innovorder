@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Foodfacts</string>
     <string name="title_foodfact_detail">FoodFact Detail</string>
+
+    <string name="error_unknown">No product for your barcode has been found</string>
+
+    <string name="home_search_no_barcode_error">Sorry, the search bar is empty</string>
+    <string name="home_product_not_found_error">No product for your barcode has been found</string>
 </resources>

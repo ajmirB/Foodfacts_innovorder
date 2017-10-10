@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/home_search_bar_edit_text_view_horizontal_margin"
         android:inputType="number"
+        android:imeOptions="actionSearch"
         app:layout_constraintLeft_toRightOf="@+id/home_search_image_view"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
