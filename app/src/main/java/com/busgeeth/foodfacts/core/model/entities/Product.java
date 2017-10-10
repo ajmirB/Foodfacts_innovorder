@@ -1,4 +1,4 @@
-package com.busgeeth.foodfacts.features.core.model.entities;
+package com.busgeeth.foodfacts.core.model.entities;
 
 import com.google.gson.annotations.SerializedName;
 

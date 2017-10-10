@@ -1,11 +1,11 @@
-package com.busgeeth.foodfacts.features.core.managers;
+package com.busgeeth.foodfacts.core.managers;
 
-import com.busgeeth.foodfacts.features.core.model.entities.Product;
-import com.busgeeth.foodfacts.features.core.model.entities.ProductStatus;
-import com.busgeeth.foodfacts.features.core.model.errors.ProductNotFound;
-import com.busgeeth.foodfacts.features.core.model.errors.UnknownError;
-import com.busgeeth.foodfacts.features.core.network.FoodFactService;
-import com.busgeeth.foodfacts.features.core.network.RestClient;
+import com.busgeeth.foodfacts.core.model.entities.Product;
+import com.busgeeth.foodfacts.core.model.entities.ProductStatus;
+import com.busgeeth.foodfacts.core.model.errors.ProductNotFound;
+import com.busgeeth.foodfacts.core.model.errors.UnknownError;
+import com.busgeeth.foodfacts.core.network.FoodFactService;
+import com.busgeeth.foodfacts.core.network.RestClient;
 
 import io.reactivex.Single;
 

@@ -1,6 +1,6 @@
-package com.busgeeth.foodfacts.features.core.network;
+package com.busgeeth.foodfacts.core.network;
 
-import com.busgeeth.foodfacts.features.core.model.entities.ProductResponse;
+import com.busgeeth.foodfacts.core.model.entities.ProductResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

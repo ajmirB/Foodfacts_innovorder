@@ -1,4 +1,4 @@
-package com.busgeeth.foodfacts.features.core.network;
+package com.busgeeth.foodfacts.core.network;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

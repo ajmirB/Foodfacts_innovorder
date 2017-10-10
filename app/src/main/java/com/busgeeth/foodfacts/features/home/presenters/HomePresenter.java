@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.busgeeth.foodfacts.R;
 import com.busgeeth.foodfacts.features.commons.BasePresenter;
-import com.busgeeth.foodfacts.features.core.managers.ProductManager;
-import com.busgeeth.foodfacts.features.core.model.errors.ProductNotFound;
+import com.busgeeth.foodfacts.core.managers.ProductManager;
+import com.busgeeth.foodfacts.core.model.errors.ProductNotFound;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
