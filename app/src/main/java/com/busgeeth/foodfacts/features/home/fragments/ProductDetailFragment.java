@@ -1,14 +1,19 @@
 package com.busgeeth.foodfacts.features.home.fragments;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.busgeeth.foodfacts.R;
 import com.busgeeth.foodfacts.features.commons.BaseFragment;
 import com.busgeeth.foodfacts.features.home.presenters.ProductDetailPresenter;
@@ -60,7 +65,17 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public void showContent(@NonNull ProductDetailPresenter.Data data) {
-        //TODO : load picture
+        Glide.with(this)
+                .asBitmap()
+                .load(data.imageUrl)
+                .into(new BitmapImageViewTarget(mImageView) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        mImageView.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
 
         mTitleTextView.setText(data.title);
         mEnergyTextView.setText(data.energyInKCal);
