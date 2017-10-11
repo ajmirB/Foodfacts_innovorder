@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.busgeeth.foodfacts.R;
 import com.busgeeth.foodfacts.features.commons.BaseActivity;
+import com.busgeeth.foodfacts.features.home.fragments.ProductDetailFragment;
 import com.busgeeth.foodfacts.features.home.fragments.ProductListFragment;
 import com.busgeeth.foodfacts.features.home.presenters.HomePresenter;
 
@@ -19,10 +20,14 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
 
     private HomePresenter mPresenter;
 
+    private ProductDetailFragment mProductDetailFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        mProductDetailFragment = (ProductDetailFragment) getSupportFragmentManager().findFragmentById(R.id.home_food_fact_detail_fragment);
 
         mPresenter = new HomePresenter(this);
 
@@ -50,6 +55,7 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
     @Override
     public void onProductClicked(Long barcodeNumber) {
         Log.d(TAG, "onProductClicked: " + barcodeNumber);
+        mProductDetailFragment.productToDisplay(barcodeNumber);
     }
 
     // endregion

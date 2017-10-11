@@ -15,6 +15,9 @@ public class Product {
     @SerializedName("image_thumb_url")
     private String mImageUrl;
 
+    @SerializedName("nutriments")
+    private Nutriments mNutriments;
+
     @SerializedName("ingredients")
     private List<Ingredient> mIngredientList;
 
@@ -29,6 +32,10 @@ public class Product {
 
     public String getImageUrl() {
         return mImageUrl;
+    }
+
+    public Nutriments getNutriments() {
+        return mNutriments;
     }
 
     public List<Ingredient> getIngredientList() {

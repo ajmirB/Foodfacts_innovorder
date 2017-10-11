@@ -26,7 +26,7 @@ public class ProductListPresenter extends BasePresenter<ProductListPresenter.Vie
         productManager.getAllProduct()
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                        productList -> showContent(productList),
+                        this::showContent,
                         Throwable::printStackTrace);
     }
 
