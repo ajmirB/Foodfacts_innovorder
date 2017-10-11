@@ -3,11 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="default_background_color">#ededed</color>
 
-    <color name="product_list_background_color">#e1e1e1</color>
-    <color name="product_list_item_background_color">#e1e1e1</color>
+    <color name="product_list_background_color">@color/default_background_color</color>
+    <color name="product_list_item_background_color">@color/default_background_color</color>
+    <color name="product_list_separator_color">#b1b1b1</color>
     <color name="product_list_item_title_color">#000</color>
     <color name="product_list_item_barcode_color">#777</color>
-    <color name="product_list_separator_color">#777</color>
+
+    <color name="product_detail_title_color">#000</color>
 
 </resources>

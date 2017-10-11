@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.busgeeth.foodfacts.R;
@@ -26,6 +27,8 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
 
     private ProductDetailFragment mProductDetailFragment;
 
+    private TextInputEditText mSearchInputEditText;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,20 +39,27 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
 
         mPresenter = new HomePresenter(this);
 
-        final TextInputEditText searchInputEditText = (TextInputEditText) findViewById(R.id.home_search_text_input_edit_text);
-        searchInputEditText.setOnEditorActionListener((v, actionId, event) -> {
+        mSearchInputEditText = (TextInputEditText) findViewById(R.id.home_search_text_input_edit_text);
+        mSearchInputEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                mPresenter.searchBarcordeClicked(searchInputEditText.getText().toString());
+                onSearchClicked();
                 return true;
             }
             return false;
         });
+
+        ImageView searchImageView = (ImageView) findViewById(R.id.home_search_image_view);
+        searchImageView.setOnClickListener(v -> onSearchClicked());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.onViewDestroyed();
+    }
+
+    public void onSearchClicked() {
+        mPresenter.searchBarcordeClicked(mSearchInputEditText.getText().toString());
     }
 
     // region HomePresenter.View
