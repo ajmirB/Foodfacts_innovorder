@@ -41,7 +41,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.View> {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            product -> {},
+                            product -> mView.showProductDetail(product),
                             throwable -> {
                                 if (throwable instanceof ProductNotFound) {
                                     mView.alertError(R.string.home_product_not_found_error);
