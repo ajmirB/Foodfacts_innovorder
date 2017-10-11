@@ -2,9 +2,14 @@
 <resources>
     <dimen name="spacing_normal">12dp</dimen>
 
+    <!-- Home search -->
     <dimen name="home_search_bar_edit_text_view_horizontal_margin">10dp</dimen>
     <dimen name="home_search_bar_icon_margin">10dp</dimen>
 
+    <!-- Product list -->
+    <dimen name="product_list_title_text_size">18sp</dimen>
+
+    <!-- Product detail -->
     <dimen name="product_detail_image_size">100dp</dimen>
     <dimen name="product_detail_title_text_size">18sp</dimen>
     <dimen name="product_detail_secondary_text_size">14sp</dimen>

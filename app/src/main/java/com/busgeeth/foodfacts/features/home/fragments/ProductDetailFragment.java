@@ -33,7 +33,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_foodfact_detail, container, false);
+        View view =  inflater.inflate(R.layout.fragment_product_detail, container, false);
 
         mImageView = (ImageView) view.findViewById(R.id.product_detail_image_view);
         mTitleTextView = (TextView) view.findViewById(R.id.product_detail_title_text_view);

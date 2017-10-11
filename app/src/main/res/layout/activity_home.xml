@@ -39,7 +39,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/home_food_fact_fragments_horizontal_guideline"
         app:layout_constraintTop_toBottomOf="@+id/home_search_text_input_edit_text"
-        tools:layout="@layout/fragment_foodfact_list"/>
+        tools:layout="@layout/fragment_product_list"/>
 
     <fragment
         android:id="@+id/home_food_fact_detail_fragment"
@@ -51,7 +51,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/home_food_fact_fragments_horizontal_guideline"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_search_text_input_edit_text"
-        tools:layout="@layout/fragment_foodfact_detail"/>
+        tools:layout="@layout/fragment_product_detail"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/home_food_fact_fragments_horizontal_guideline"

@@ -40,7 +40,7 @@ public class ProductListFragment extends BaseFragment implements ProductListPres
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_foodfact_list, container, false);
+        View view =  inflater.inflate(R.layout.fragment_product_list, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.product_list_recyclerview);
         mRecyclerView.setHasFixedSize(true);
