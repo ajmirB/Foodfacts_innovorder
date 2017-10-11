@@ -16,6 +16,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProductDetailPresenter extends BasePresenter<ProductDetailPresenter.View> {
@@ -28,13 +29,14 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailPresenter
     }
 
     public void productToDisplay(long barcodeNumber) {
-        mProductManager.getProduct(barcodeNumber)
+        Disposable disposable = mProductManager.getProduct(barcodeNumber)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         this::showContent,
                         Throwable::printStackTrace
                 );
+        mCompositeDisposable.add(disposable);
     }
 
     private void showContent(Product product) {
@@ -53,6 +55,8 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailPresenter
         mView.showContent(data);
     }
 
+    // region Presenter protocol
+
     public interface View extends BasePresenter.View {
         void showContent(@NonNull Data data);
     }
@@ -63,4 +67,6 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailPresenter
         public String energyInKCal;
         public String ingredients;
     }
+
+    // endregion
 }

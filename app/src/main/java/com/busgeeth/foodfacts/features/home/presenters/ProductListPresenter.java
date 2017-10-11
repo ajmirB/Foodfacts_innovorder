@@ -10,6 +10,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProductListPresenter extends BasePresenter<ProductListPresenter.View> {
@@ -25,22 +26,25 @@ public class ProductListPresenter extends BasePresenter<ProductListPresenter.Vie
     public void onViewCreated() {
         super.onViewCreated();
         ProductManager productManager = new ProductManager();
-        productManager.getAllProduct()
+        Disposable disposable = productManager.getAllProduct()
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         this::showContent,
                         Throwable::printStackTrace
                 );
+        mCompositeDisposable.add(disposable);
     }
 
     public void onNewProductInStore(long barcodeNumber) {
-        mProductManager.getProduct(barcodeNumber)
-                .observeOn(AndroidSchedulers.mainThread())
+        Disposable disposable = mProductManager.getProduct(barcodeNumber)
+                .subscribeOn(Schedulers.io())
                 .map(this::convertToProductItemData)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         productItemData -> mView.addProductInList(productItemData),
                         Throwable::printStackTrace
                 );
+        mCompositeDisposable.add(disposable);
     }
 
     private void showContent(List<Product> products) {

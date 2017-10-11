@@ -9,6 +9,7 @@ import com.busgeeth.foodfacts.core.model.errors.ProductNotFound;
 import com.busgeeth.foodfacts.features.commons.BasePresenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomePresenter extends BasePresenter<HomePresenter.View> {
@@ -19,7 +20,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.View> {
         super(view);
         mProductManager = new ProductManager();
 
-        mProductManager.onInsertInStoreObservable()
+        Disposable disposable = mProductManager.onInsertInStoreObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         product -> {
@@ -28,6 +29,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.View> {
                         },
                         Throwable::printStackTrace
                 );
+        mCompositeDisposable.add(disposable);
     }
 
     public void searchBarcordeClicked(String barcodeNumberString) {
@@ -35,7 +37,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.View> {
             mView.alertError(R.string.home_search_no_barcode_error);
         } else {
             Long barcodeNumber = Long.valueOf(barcodeNumberString);
-            mProductManager.getProduct(barcodeNumber)
+            Disposable disposable = mProductManager.getProduct(barcodeNumber)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -48,12 +50,17 @@ public class HomePresenter extends BasePresenter<HomePresenter.View> {
                                 }
                             }
                     );
+            mCompositeDisposable.add(disposable);
         }
     }
+
+    // region Presenter protocol
 
     public interface View extends BasePresenter.View {
         void alertError(int messageResId);
         void addProductInList(@NonNull Product product);
         void showProductDetail(@NonNull Product product);
     }
+
+    // endregion
 }

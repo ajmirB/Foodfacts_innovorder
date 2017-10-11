@@ -46,6 +46,12 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onViewDestroyed();
+    }
+
     // region HomePresenter.View
 
     @Override
