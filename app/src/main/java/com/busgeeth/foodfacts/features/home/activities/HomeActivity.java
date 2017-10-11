@@ -1,6 +1,7 @@
 package com.busgeeth.foodfacts.features.home.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import com.busgeeth.foodfacts.R;
+import com.busgeeth.foodfacts.core.model.entities.Product;
 import com.busgeeth.foodfacts.features.commons.BaseActivity;
 import com.busgeeth.foodfacts.features.home.fragments.ProductDetailFragment;
 import com.busgeeth.foodfacts.features.home.fragments.ProductListFragment;
@@ -20,6 +22,8 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
 
     private HomePresenter mPresenter;
 
+    private ProductListFragment mProductListFragment;
+
     private ProductDetailFragment mProductDetailFragment;
 
     @Override
@@ -27,6 +31,7 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        mProductListFragment = (ProductListFragment) getSupportFragmentManager().findFragmentById(R.id.home_food_fact_list_fragment);
         mProductDetailFragment = (ProductDetailFragment) getSupportFragmentManager().findFragmentById(R.id.home_food_fact_detail_fragment);
 
         mPresenter = new HomePresenter(this);
@@ -46,6 +51,16 @@ public class HomeActivity extends BaseActivity implements HomePresenter.View, Pr
     @Override
     public void alertError(int messageResId) {
         Toast.makeText(this, messageResId, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void addProductInList(@NonNull Product product) {
+        mProductListFragment.onNewProductInStore(product.getBarcode());
+    }
+
+    @Override
+    public void showProductDetail(@NonNull Product product) {
+        mProductDetailFragment.productToDisplay(product.getBarcode());
     }
 
     // endregion

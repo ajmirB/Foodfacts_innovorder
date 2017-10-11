@@ -13,18 +13,28 @@ import com.busgeeth.foodfacts.core.stores.ProductStore;
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class ProductManager {
 
     private static final String TAG = ProductManager.class.getSimpleName();
 
-    FoodFactService mFoodFactService;
+    private FoodFactService mFoodFactService;
 
-    ProductStore mProductStore;
+    private ProductStore mProductStore;
+
+    private BehaviorSubject<Product> mInsertInStoreObservable;
 
     public ProductManager() {
         mFoodFactService = RestClient.getFoodFactService();
         mProductStore = new ProductStore();
+    }
+
+    public BehaviorSubject<Product> onInsertInStoreObservable() {
+        if (mInsertInStoreObservable == null) {
+            mInsertInStoreObservable = BehaviorSubject.create();
+        }
+        return mInsertInStoreObservable;
     }
 
     /**
@@ -64,6 +74,10 @@ public class ProductManager {
                         return Single.error(new UnknownError());
                     }
                 })
-                .flatMap(product -> mProductStore.saveProduct(product).andThen(Single.just(product)));
+                .flatMap(product ->
+                    mProductStore.saveProduct(product)
+                            .andThen(Single.just(product))
+                            .doOnSuccess(productResult -> onInsertInStoreObservable().onNext(productResult))
+                );
     }
 }

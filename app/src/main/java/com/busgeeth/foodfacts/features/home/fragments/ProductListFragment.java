@@ -16,14 +16,18 @@ import com.busgeeth.foodfacts.features.commons.BaseFragment;
 import com.busgeeth.foodfacts.features.home.adapters.ProductListAdapter;
 import com.busgeeth.foodfacts.features.home.presenters.ProductListPresenter;
 
+import java.util.List;
+
 
 public class ProductListFragment extends BaseFragment implements ProductListPresenter.View {
 
-    ProductListPresenter mProductListPresenter;
+    private ProductListPresenter mProductListPresenter;
 
-    Listener mProductListListener;
+    private Listener mProductListListener;
 
-    RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
+
+    private List<ProductListPresenter.ProductItemData> mProductItemDataList;
 
     @Override
     public void onAttach(Context context) {
@@ -60,12 +64,23 @@ public class ProductListFragment extends BaseFragment implements ProductListPres
         mProductListPresenter.onViewDestroyed();
     }
 
+    public void onNewProductInStore(long barcode) {
+        mProductListPresenter.onNewProductInStore(barcode);
+    }
+
     // region ProductListPresenter.View
 
     @Override
     public void showContent(@NonNull ProductListPresenter.Data data) {
-        ProductListAdapter productListAdapter = new ProductListAdapter(data.productItemsData);
+        mProductItemDataList = data.productItemsData;
+        ProductListAdapter productListAdapter = new ProductListAdapter(mProductItemDataList);
         mRecyclerView.setAdapter(productListAdapter);
+    }
+
+    @Override
+    public void addProductInList(@NonNull ProductListPresenter.ProductItemData productItemData) {
+        mProductItemDataList.add(0, productItemData);
+        mRecyclerView.getAdapter().notifyItemInserted(0);
     }
 
     @Override

@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ProductDetailPresenter extends BasePresenter<ProductDetailPresenter.View> {
 
-    ProductManager mProductManager;
+    private ProductManager mProductManager;
 
     public ProductDetailPresenter(View view) {
         super(view);
